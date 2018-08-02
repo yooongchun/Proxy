@@ -22,8 +22,8 @@
 
 #### 如何使用？
 试试访问如下页面：
-- [POST请求:www.yooongchun.com:9999](www.yooongchun.com:9999)
-- [Get请求:www.yooongchun.com:9999/?name=yooongchun&password=121561&method=random](www.yooongchun.com:9999/?name=yooongchun&password=121561&method=random)
+- [POST请求:www.yooongchun.com:9999](http://www.yooongchun.com:9999)
+- [Get请求:www.yooongchun.com:9999/?name=yooongchun&password=121561&method=random](http://www.yooongchun.com:9999/?name=yooongchun&password=121561&method=random)
 程序在运行中不断将抓取到的IP存入数据库中，然后验证模块定时验证IP地址的有效性；一旦测试有效，会设定score=100（最大值），而无效则会对score减一，当减到score小于0则删除，初始加入时score为10。
 
 程序通过API模块对外提供调用，要获取代理IP地址，有两种方式可访问：
