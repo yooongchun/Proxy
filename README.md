@@ -29,7 +29,7 @@
 - 第一种：使用Get请求：
 
   ```python
-  http://www.yooongchun.com:9999/?name=yooongchun&password=121561*method=random
+  http://www.yooongchun.com:9999/?name=yooongchun&password=121561&method=random
   ```
 
   这里name参数和password参数是为了验证身份，必须填写正确；method参数可以选择的值有以下几种：
