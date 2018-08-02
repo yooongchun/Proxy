@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <style>
+        #header {
+            /* background-color: #eeeeee; */
+            /* color: black; */
+            text-align: center;
+            padding: 5px;
+        }
+
+        #body {
+            /* background-color: lightgrey; */
+        }
+
+        #form {
+            /* background-color: #eeeeee; */
+            text-align: left;
+            height: 200px;
+            width: 400px;
+            padding-top: 15%;
+            padding-left: 40%;
+        }
+
+        #container {
+            position: absolute;
+            z-index: -100;
+            top: 0%;
+            left: 0%;
+            height: 100%;
+            width: 100%;
+        }
+
+        #title {
+            font-size: 30px;
+        }
+    </style>
+    <meta charset="utf-8">
+</head>
+
+<body id='body'>
+    <div id='header'>
+        <p id='title'>Welcome to yooongchun's site!</p>
+        <p>
+            This page is intended to provide proxy ip address.
+        </p>
+    </div>
+
+    <div id='form'>
+        <form>
+            Name&nbsp&nbsp&nbsp&nbsp&nbsp
+            <input type="text" name="name">
+            <br/>
+            <br/> Password
+            <input type="text" name="password">
+            <br/>
+            <br/> Method&nbsp&nbsp&nbsp
+            <select name="method">
+                <option value="random">Random</option>
+                <option value="random_max">Random max</option>
+                <option value="all">All</option>
+                <option value="all_max">All max</option>
+                <option value="count">Count</option>
+            </select>
+            <br/>
+            <br/>
+            <p style="padding-left: 15%">
+                <input type="submit" value="Submit">
+            </p>
+        </form>
+    </div>
+    <div id="container"></div>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+
+        var data = [{
+            fixed: true,
+            x: myChart.getWidth() / 2,
+            y: myChart.getHeight() / 2,
+            symbolSize: 20,
+            id: '-1'
+        }];
+
+        var edges = [];
+
+        option = {
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                animation: false,
+                data: data,
+                force: {
+                    // initLayout: 'circular'
+                    // gravity: 0
+                    repulsion: 100,
+                    edgeLength: 5
+                },
+                edges: edges
+            }]
+        };
+
+        setInterval(function () {
+            data.push({
+                id: data.length
+            });
+            var source = Math.round((data.length - 1) * Math.random());
+            var target = Math.round((data.length - 1) * Math.random());
+            if (source !== target) {
+                edges.push({
+                    source: source,
+                    target: target
+                });
+            }
+            myChart.setOption({
+                series: [{
+                    roam: true,
+                    data: data,
+                    edges: edges
+                }]
+            });
+
+            // console.log('nodes: ' + data.length);
+            // console.log('links: ' + data.length);
+        }, 500);;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+
+</body>
+
+</html>
